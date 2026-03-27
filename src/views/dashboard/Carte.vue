@@ -1,0 +1,49 @@
+<template>
+  <div class="min-h-screen bg-gray-100 p-6">
+    <div class="max-w-6xl mx-auto">
+
+      <!-- Barre action -->
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-3xl font-semibold text-[#0297B8]">
+          {{ activeTab === 'creer' ? 'Créer une Carte' : 'Liste des Cartes' }}
+        </h2>
+
+        <!-- Bouton dynamique -->
+        <div>
+          <!-- Sur liste : bouton pour créer une carte -->
+          <router-link
+            v-if="activeTab === 'liste'"
+            to="/app/carte/creer"
+            class="bg-[#0297B8] text-white px-4 py-2 rounded-lg hover:bg-[#02739A]"
+          >
+            Créer une Carte
+          </router-link>
+
+          <!-- Sur création : bouton retour à la liste -->
+          <router-link
+            v-else
+            to="/app/carte/liste"
+            class=" text-black px-4 py-2 rounded-lg hover:bg-gray-600"
+          >
+            Retour à la Liste
+          </router-link>
+        </div>
+      </div>
+
+      <!-- Contenu dynamique -->
+      <router-view />
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+// Détermine si on est sur la page création ou la liste
+const activeTab = computed(() => {
+  return route.path.includes('/creer') ? 'creer' : 'liste'
+})
+</script>
