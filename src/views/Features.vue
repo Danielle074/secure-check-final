@@ -1,12 +1,12 @@
 <template>
   <div class="min-h-screen bg-gradient-to-b from-gray-50 to-white">
     <!-- Hero Section -->
-    <section class="pt-16 pb-12 md:pt-20 md:pb-16 lg:pt-24 lg:pb-20 xl:pt-32 xl:pb-24 2xl:pt-40 2xl:pb-32 bg-gradient-to-r from-[#438fab] to-[#3190a5] text-white">
-      <div class="max-w-7xl 2xl:max-w-[90%] 3xl:max-w-[80%] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 text-center">
-        <h1 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold mb-4 md:mb-6 lg:mb-8 animate-fade-in-down leading-tight">
+    <section class="pt-12 pb-8 md:pt-16 md:pb-12 lg:pt-20 lg:pb-16 bg-gradient-to-r from-[#438fab] to-[#3190a5] text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-14 md:mb-4 lg:mb-6 animate-fade-in-down leading-tight">
           Des fonctionnalités puissantes pour votre entreprise
         </h1>
-        <p class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl opacity-90 max-w-2xl xl:max-w-3xl 2xl:max-w-4xl mx-auto leading-relaxed animate-fade-in-up">
+        <p class="text-sm sm:text-base md:text-lg lg:text-xl opacity-90 max-w-2xl mx-auto leading-relaxed animate-fade-in-up">
           Découvrez comment Secure Check révolutionne la gestion de vos rendez-vous et événements
           professionnels
         </p>
@@ -14,14 +14,14 @@
     </section>
 
     <!-- Features Overview -->
-    <section class="py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-32 px-4 sm:px-6 lg:px-8 2xl:px-12">
-      <div class="max-w-7xl 2xl:max-w-[90%] 3xl:max-w-[80%] mx-auto">
-        <div class="text-center mb-12 md:mb-16 lg:mb-20">
-          <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-gray-900 mb-3 md:mb-4 lg:mb-6 animate-fade-in-up">
+    <section class="py-8 md:py-12 lg:py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-8 md:mb-12 lg:mb-16">
+          <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 md:mb-3 lg:mb-4 animate-fade-in-up">
             Tout ce dont vous avez besoin
           </h2>
           <p
-            class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-gray-600 max-w-2xl xl:max-w-3xl 2xl:max-w-4xl mx-auto animate-fade-in-up leading-relaxed"
+            class="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto animate-fade-in-up leading-relaxed"
             style="animation-delay: 0.1s"
           >
             Une plateforme complète qui s'adapte à tous vos besoins de gestion de rendez-vous
@@ -29,21 +29,21 @@
         </div>
 
         <!-- Features Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-16">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           <div
             v-for="(feature, index) in features"
             :key="index"
-            class="feature-item bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 2xl:p-16 shadow-lg border border-gray-200 transform transition-all duration-500 hover:-translate-y-2 hover:shadow-xl group"
+            class="feature-item bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg border border-gray-200 transform transition-all duration-500 hover:-translate-y-2 hover:shadow-xl group"
           >
             <div
-              class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 xl:w-18 xl:h-18 2xl:w-20 2xl:h-20 bg-gradient-to-br from-[#438fab] to-[#3190a5] rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300"
+              class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-[#438fab] to-[#3190a5] rounded-xl flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300"
             >
-              <i :class="feature.icon" class="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl"></i>
+              <i :class="feature.icon" class="text-white text-lg sm:text-xl md:text-2xl"></i>
             </div>
-            <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4 leading-tight">
+            <h3 class="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-gray-900 mb-1 sm:mb-2 leading-tight">
               {{ feature.title }}
             </h3>
-            <p class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-gray-600 leading-relaxed">
+            <p class="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
               {{ feature.description }}
             </p>
           </div>
@@ -52,32 +52,32 @@
     </section>
 
     <!-- Detailed Features Section -->
-    <section class="py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-32 bg-gray-50">
-      <div class="max-w-7xl 2xl:max-w-[90%] 3xl:max-w-[80%] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
+    <section class="py-8 md:py-12 lg:py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <!-- Personnalisation & QR Codes -->
-        <div class="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-16 items-center mb-12 md:mb-16 lg:mb-20 xl:mb-24">
+        <div class="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 items-center mb-10 md:mb-14 lg:mb-18">
           <div class="order-1 animate-fade-in-right">
             <div
-              class="bg-gradient-to-r from-[#438fab] to-[#3190a5] text-white px-3 py-1 sm:px-4 sm:py-2 md:px-5 md:py-2 lg:px-6 lg:py-3 rounded-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-semibold inline-block mb-3 sm:mb-4 md:mb-5 transform transition-transform hover:scale-105 duration-300"
+              class="bg-gradient-to-r from-[#438fab] to-[#3190a5] text-white px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold inline-block mb-2 sm:mb-3 transform transition-transform hover:scale-105 duration-300"
             >
               Personnalisation & QR Codes
             </div>
-            <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-5 lg:mb-6 leading-tight">
+            <h2 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 leading-tight">
               Une expérience sur mesure
             </h2>
-            <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-gray-600 mb-4 sm:mb-5 md:mb-6 lg:mb-8 leading-relaxed">
+            <p class="text-sm sm:text-base md:text-lg text-gray-600 mb-3 sm:mb-4 lg:mb-6 leading-relaxed">
               Donnez une touche unique à votre système avec des QR Codes personnalisés permettant un
               accès rapide, une gestion simplifiée et une expérience utilisateur fluide.
             </p>
-            <ul class="space-y-2 sm:space-y-3 md:space-y-4">
+            <ul class="space-y-1.5 sm:space-y-2 md:space-y-3">
               <li
                 v-for="(item, index) in qrFeatures"
                 :key="index"
                 class="flex items-start sm:items-center transform transition-transform hover:translate-x-2 duration-300"
               >
-                <i class="bx bx-check text-green-500 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl mr-2 sm:mr-3 md:mr-4 mt-0.5 sm:mt-0 flex-shrink-0"></i>
-                <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-gray-700 leading-relaxed">
+                <i class="bx bx-check text-green-500 text-sm sm:text-base md:text-lg mr-2 sm:mr-3 mt-0.5 sm:mt-0 flex-shrink-0"></i>
+                <span class="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed">
                   {{ item }}
                 </span>
               </li>
@@ -86,18 +86,18 @@
 
           <div class="order-2 animate-fade-in-left">
             <div
-              class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 2xl:p-16 shadow-2xl border border-gray-200 transform transition-all duration-500 hover:scale-105"
+              class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl border border-gray-200 transform transition-all duration-500 hover:scale-105"
             >
               <img
                 :src="header4"
                 alt="QR Code personnalisé"
-                class="w-full h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72 2xl:h-80 object-cover rounded-lg sm:rounded-xl mb-3 sm:mb-4 md:mb-5"
+                class="w-full h-32 sm:h-40 md:h-48 lg:h-56 object-cover rounded-lg sm:rounded-xl mb-3 sm:mb-4"
               />
               <div class="text-center">
-                <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold text-gray-900 mb-1 sm:mb-2 leading-tight">
+                <h3 class="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-gray-900 mb-1 leading-tight">
                   QR Code Dynamique
                 </h3>
-                <p class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-gray-600 leading-relaxed">
+                <p class="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
                   Un moyen moderne et sécurisé d'interagir avec vos clients
                 </p>
               </div>
@@ -106,28 +106,28 @@
         </div>
 
         <!-- Gestion des Rendez-vous -->
-        <div class="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-16 items-center mb-12 md:mb-16 lg:mb-20 xl:mb-24">
+        <div class="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 items-center mb-10 md:mb-14 lg:mb-18">
           <div class="order-2 lg:order-1 animate-fade-in-left">
             <div
-              class="bg-gradient-to-r from-[#438fab] to-[#3190a5] text-white px-3 py-1 sm:px-4 sm:py-2 md:px-5 md:py-2 lg:px-6 lg:py-3 rounded-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-semibold inline-block mb-3 sm:mb-4 md:mb-5 transform transition-transform hover:scale-105 duration-300"
+              class="bg-gradient-to-r from-[#438fab] to-[#3190a5] text-white px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold inline-block mb-2 sm:mb-3 transform transition-transform hover:scale-105 duration-300"
             >
               Gestion des Rendez-vous
             </div>
-            <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-5 lg:mb-6 leading-tight">
+            <h2 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 leading-tight">
               Optimisez votre planning
             </h2>
-            <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-gray-600 mb-4 sm:mb-5 md:mb-6 lg:mb-8 leading-relaxed">
+            <p class="text-sm sm:text-base md:text-lg text-gray-600 mb-3 sm:mb-4 lg:mb-6 leading-relaxed">
               Une gestion complète de vos rendez-vous avec des outils intuitifs pour planifier,
               modifier et suivre toutes vos rencontres professionnelles.
             </p>
-            <ul class="space-y-2 sm:space-y-3 md:space-y-4">
+            <ul class="space-y-1.5 sm:space-y-2 md:space-y-3">
               <li
                 v-for="(item, index) in appointmentFeatures"
                 :key="index"
                 class="flex items-start sm:items-center transform transition-transform hover:translate-x-2 duration-300"
               >
-                <i class="bx bx-check text-green-500 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl mr-2 sm:mr-3 md:mr-4 mt-0.5 sm:mt-0 flex-shrink-0"></i>
-                <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-gray-700 leading-relaxed">
+                <i class="bx bx-check text-green-500 text-sm sm:text-base md:text-lg mr-2 sm:mr-3 mt-0.5 sm:mt-0 flex-shrink-0"></i>
+                <span class="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed">
                   {{ item }}
                 </span>
               </li>
@@ -135,18 +135,18 @@
           </div>
           <div class="order-1 lg:order-2 animate-fade-in-right">
             <div
-              class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 2xl:p-16 shadow-2xl border border-gray-200 transform transition-all duration-500 hover:scale-105"
+              class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl border border-gray-200 transform transition-all duration-500 hover:scale-105"
             >
               <img
                 :src="header1"
                 alt="Gestion des rendez-vous"
-                class="w-full h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72 2xl:h-80 object-cover rounded-lg sm:rounded-xl mb-3 sm:mb-4 md:mb-5"
+                class="w-full h-32 sm:h-40 md:h-48 lg:h-56 object-cover rounded-lg sm:rounded-xl mb-3 sm:mb-4"
               />
               <div class="text-center">
-                <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold text-gray-900 mb-1 sm:mb-2 leading-tight">
+                <h3 class="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-gray-900 mb-1 leading-tight">
                   Interface intuitive
                 </h3>
-                <p class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-gray-600 leading-relaxed">
+                <p class="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
                   Visualisez et gérez votre planning en temps réel
                 </p>
               </div>
@@ -155,28 +155,28 @@
         </div>
 
         <!-- Notifications Automatiques -->
-        <div class="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-16 items-center mb-12 md:mb-16 lg:mb-20 xl:mb-24">
+        <div class="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 items-center mb-10 md:mb-14 lg:mb-18">
           <div class="order-1 animate-fade-in-right">
             <div
-              class="bg-gradient-to-r from-[#438fab] to-[#3190a5] text-white px-3 py-1 sm:px-4 sm:py-2 md:px-5 md:py-2 lg:px-6 lg:py-3 rounded-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-semibold inline-block mb-3 sm:mb-4 md:mb-5 transform transition-transform hover:scale-105 duration-300"
+              class="bg-gradient-to-r from-[#438fab] to-[#3190a5] text-white px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold inline-block mb-2 sm:mb-3 transform transition-transform hover:scale-105 duration-300"
             >
               Notifications Intelligentes
             </div>
-            <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-5 lg:mb-6 leading-tight">
+            <h2 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 leading-tight">
               Restez informé en temps réel
             </h2>
-            <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-gray-600 mb-4 sm:mb-5 md:mb-6 lg:mb-8 leading-relaxed">
+            <p class="text-sm sm:text-base md:text-lg text-gray-600 mb-3 sm:mb-4 lg:mb-6 leading-relaxed">
               Des notifications personnalisables pour ne jamais manquer un rendez-vous important et
               garder vos clients informés.
             </p>
-            <ul class="space-y-2 sm:space-y-3 md:space-y-4">
+            <ul class="space-y-1.5 sm:space-y-2 md:space-y-3">
               <li
                 v-for="(item, index) in notificationFeatures"
                 :key="index"
                 class="flex items-start sm:items-center transform transition-transform hover:translate-x-2 duration-300"
               >
-                <i class="bx bx-check text-green-500 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl mr-2 sm:mr-3 md:mr-4 mt-0.5 sm:mt-0 flex-shrink-0"></i>
-                <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-gray-700 leading-relaxed">
+                <i class="bx bx-check text-green-500 text-sm sm:text-base md:text-lg mr-2 sm:mr-3 mt-0.5 sm:mt-0 flex-shrink-0"></i>
+                <span class="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed">
                   {{ item }}
                 </span>
               </li>
@@ -184,18 +184,18 @@
           </div>
           <div class="order-2 animate-fade-in-left">
             <div
-              class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 2xl:p-16 shadow-2xl border border-gray-200 transform transition-all duration-500 hover:scale-105"
+              class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl border border-gray-200 transform transition-all duration-500 hover:scale-105"
             >
               <img
                 :src="header2"
                 alt="Notifications"
-                class="w-full h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72 2xl:h-80 object-cover rounded-lg sm:rounded-xl mb-3 sm:mb-4 md:mb-5"
+                class="w-full h-32 sm:h-40 md:h-48 lg:h-56 object-cover rounded-lg sm:rounded-xl mb-3 sm:mb-4"
               />
               <div class="text-center">
-                <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold text-gray-900 mb-1 sm:mb-2 leading-tight">
+                <h3 class="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-gray-900 mb-1 leading-tight">
                   Multi-canaux
                 </h3>
-                <p class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-gray-600 leading-relaxed">
+                <p class="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
                   Recevez des alertes sur tous vos appareils
                 </p>
               </div>
@@ -204,28 +204,28 @@
         </div>
 
         <!-- Sécurité et Confidentialité -->
-        <div class="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-16 items-center">
+        <div class="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 items-center">
           <div class="order-2 lg:order-1 animate-fade-in-left">
             <div
-              class="bg-gradient-to-r from-[#438fab] to-[#3190a5] text-white px-3 py-1 sm:px-4 sm:py-2 md:px-5 md:py-2 lg:px-6 lg:py-3 rounded-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-semibold inline-block mb-3 sm:mb-4 md:mb-5 transform transition-transform hover:scale-105 duration-300"
+              class="bg-gradient-to-r from-[#438fab] to-[#3190a5] text-white px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold inline-block mb-2 sm:mb-3 transform transition-transform hover:scale-105 duration-300"
             >
               Sécurité Avancée
             </div>
-            <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-5 lg:mb-6 leading-tight">
+            <h2 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 leading-tight">
               Vos données en sécurité
             </h2>
-            <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-gray-600 mb-4 sm:mb-5 md:mb-6 lg:mb-8 leading-relaxed">
+            <p class="text-sm sm:text-base md:text-lg text-gray-600 mb-3 sm:mb-4 lg:mb-6 leading-relaxed">
               Une protection maximale de vos données avec des standards de sécurité enterprise et
               une conformité RGPD totale.
             </p>
-            <ul class="space-y-2 sm:space-y-3 md:space-y-4">
+            <ul class="space-y-1.5 sm:space-y-2 md:space-y-3">
               <li
                 v-for="(item, index) in securityFeatures"
                 :key="index"
                 class="flex items-start sm:items-center transform transition-transform hover:translate-x-2 duration-300"
               >
-                <i class="bx bx-check text-green-500 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl mr-2 sm:mr-3 md:mr-4 mt-0.5 sm:mt-0 flex-shrink-0"></i>
-                <span class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-gray-700 leading-relaxed">
+                <i class="bx bx-check text-green-500 text-sm sm:text-base md:text-lg mr-2 sm:mr-3 mt-0.5 sm:mt-0 flex-shrink-0"></i>
+                <span class="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed">
                   {{ item }}
                 </span>
               </li>
@@ -233,18 +233,18 @@
           </div>
           <div class="order-1 lg:order-2 animate-fade-in-right">
             <div
-              class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 2xl:p-16 shadow-2xl border border-gray-200 transform transition-all duration-500 hover:scale-105"
+              class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl border border-gray-200 transform transition-all duration-500 hover:scale-105"
             >
               <img
                 :src="header3"
                 alt="Sécurité"
-                class="w-full h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72 2xl:h-80 object-cover rounded-lg sm:rounded-xl mb-3 sm:mb-4 md:mb-5"
+                class="w-full h-32 sm:h-40 md:h-48 lg:h-56 object-cover rounded-lg sm:rounded-xl mb-3 sm:mb-4"
               />
               <div class="text-center">
-                <h3 class="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold text-gray-900 mb-1 sm:mb-2 leading-tight">
+                <h3 class="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-gray-900 mb-1 leading-tight">
                   Protection maximale
                 </h3>
-                <p class="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-gray-600 leading-relaxed">
+                <p class="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
                   Vos données sont entre de bonnes mains
                 </p>
               </div>
@@ -255,35 +255,35 @@
     </section>
 
     <!-- Integrations Section -->
-    <section class="py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-32 px-4 sm:px-6 lg:px-8 2xl:px-12">
-      <div class="max-w-7xl 2xl:max-w-[90%] 3xl:max-w-[80%] mx-auto">
-        <div class="text-center mb-12 md:mb-16 lg:mb-20">
-          <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-gray-900 mb-3 md:mb-4 lg:mb-6 animate-fade-in-up">
+    <section class="py-8 md:py-12 lg:py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-8 md:mb-12 lg:mb-16">
+          <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 md:mb-3 lg:mb-4 animate-fade-in-up">
             Intégrations puissantes
           </h2>
           <p
-            class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-gray-600 max-w-2xl xl:max-w-3xl 2xl:max-w-4xl mx-auto animate-fade-in-up leading-relaxed"
+            class="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto animate-fade-in-up leading-relaxed"
             style="animation-delay: 0.1s"
           >
             Connectez Secure Check à vos outils préférés pour un workflow optimisé
           </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-16 justify-center items-stretch">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 justify-center items-stretch">
           <div
             v-for="(integration, index) in integrations"
             :key="index"
-            class="integration-item bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 2xl:p-16 shadow-lg border border-gray-200 text-center transform transition-all duration-500 hover:scale-105 hover:shadow-xl"
+            class="integration-item bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg border border-gray-200 text-center transform transition-all duration-500 hover:scale-105 hover:shadow-xl"
           >
             <div
-              class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-20 xl:h-20 2xl:w-24 2xl:h-24 bg-gray-100 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 md:mb-6 transform transition-transform duration-300 group-hover:scale-110"
+              class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 transform transition-transform duration-300 group-hover:scale-110"
             >
-              <i :class="integration.icon" class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-gray-600"></i>
+              <i :class="integration.icon" class="text-2xl sm:text-3xl md:text-4xl text-gray-600"></i>
             </div>
-            <h3 class="font-bold text-gray-900 mb-2 sm:mb-3 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-tight">
+            <h3 class="font-bold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base md:text-lg lg:text-xl leading-tight">
               {{ integration.name }}
             </h3>
-            <p class="text-gray-600 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl leading-relaxed">
+            <p class="text-gray-600 text-xs sm:text-sm md:text-base leading-relaxed">
               {{ integration.description }}
             </p>
           </div>
@@ -292,28 +292,28 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-32 bg-gradient-to-r from-[#438fab] to-[#3190a5] text-white">
-      <div class="max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 text-center">
-        <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold mb-3 md:mb-4 lg:mb-6 animate-fade-in-up leading-tight">
+    <section class="py-8 md:py-12 lg:py-16 bg-gradient-to-r from-[#438fab] to-[#3190a5] text-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-2 md:mb-3 lg:mb-4 animate-fade-in-up leading-tight">
           Prêt à découvrir toutes nos fonctionnalités ?
         </h2>
-        <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl mb-4 md:mb-6 lg:mb-8 opacity-90 animate-fade-in-up leading-relaxed" style="animation-delay: 0.1s">
+        <p class="text-sm sm:text-base md:text-lg mb-3 md:mb-4 lg:mb-6 opacity-90 animate-fade-in-up leading-relaxed" style="animation-delay: 0.1s">
           Rejoignez les entreprises qui optimisent leur gestion de rendez-vous avec Secure Check
         </p>
         <div
-          class="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center animate-fade-in-up"
+          class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in-up"
           style="animation-delay: 0.2s"
         >
           <RouterLink to="/essai-gratuit" class="w-full sm:w-auto">
             <button
-              class="bg-white text-[#438fab] px-6 py-3 md:px-8 md:py-4 lg:px-10 lg:py-4 xl:px-12 xl:py-5 2xl:px-16 2xl:py-6 rounded-xl font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 text-sm md:text-base lg:text-lg xl:text-xl w-full sm:w-auto"
+              class="bg-white text-[#438fab] px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 rounded-xl font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 text-sm sm:text-base md:text-lg w-full sm:w-auto"
             >
               Essai gratuit 90 jours
             </button>
           </RouterLink>
           <RouterLink to="/demo" class="w-full sm:w-auto">
             <button
-              class="border-2 border-white text-white px-6 py-3 md:px-8 md:py-4 lg:px-10 lg:py-4 xl:px-12 xl:py-5 2xl:px-16 2xl:py-6 rounded-xl font-bold hover:bg-white/10 transition-all duration-300 transform hover:scale-105 text-sm md:text-base lg:text-lg xl:text-xl w-full sm:w-auto"
+              class="border-2 border-white text-white px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 rounded-xl font-bold hover:bg-white/10 transition-all duration-300 transform hover:scale-105 text-sm sm:text-base md:text-lg w-full sm:w-auto"
             >
               Voir une démo
             </button>
@@ -324,60 +324,46 @@
 
     <!-- Footer -->
     <footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden">
-      <!-- Effet de particules -->
-      <div class="absolute inset-0 opacity-5">
-        <div class="absolute top-10 left-10 w-2 h-2 bg-white rounded-full animate-pulse"></div>
-        <div class="absolute top-20 right-20 w-1 h-1 bg-white rounded-full animate-pulse"></div>
-        <div class="absolute bottom-20 left-1/4 w-3 h-3 bg-white rounded-full animate-pulse"></div>
-        <div class="absolute bottom-10 right-1/3 w-1 h-1 bg-white rounded-full animate-pulse"></div>
-      </div>
-
-      <div class="relative max-w-7xl 2xl:max-w-[90%] 3xl:max-w-[80%] mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16">
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 lg:py-14">
         <!-- Section principale du footer -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10 xl:gap-12 mb-8 md:mb-12 lg:mb-16">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10 mb-6 md:mb-10 lg:mb-14">
           <!-- Colonne 1 - Logo et description -->
           <div class="lg:col-span-1 animate-fade-in-up">
-            <div
-              class="flex items-center space-x-2 sm:space-x-3 mb-3 sm:mb-4 md:mb-6 transform transition-transform hover:scale-105 duration-300"
-            >
-              <div
-                class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-white rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg overflow-hidden"
-              >
+            <div class="flex items-center space-x-2 sm:space-x-3 mb-2 sm:mb-3 md:mb-4 transform transition-transform hover:scale-105 duration-300">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-white rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
                 <img :src="logo" alt="Secure Check" class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 object-contain" />
               </div>
               <div>
-                <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">Secure Check</h2>
-                <p class="text-[#438fab] text-xs sm:text-sm md:text-base font-semibold">Solution Professionnelle</p>
+                <h2 class="text-base sm:text-lg md:text-xl font-bold">Secure Check</h2>
+                <p class="text-[#438fab] text-xs sm:text-sm font-semibold">Solution Professionnelle</p>
               </div>
             </div>
-            <p class="text-gray-300 mb-3 sm:mb-4 md:mb-6 leading-relaxed text-xs sm:text-sm md:text-base">
+            <p class="text-gray-300 mb-3 sm:mb-4 leading-relaxed text-xs sm:text-sm">
               La plateforme de référence pour la gestion intelligente de vos rendez-vous et
               événements professionnels.
             </p>
-            <div class="flex space-x-2 sm:space-x-3 md:space-x-4">
+            <div class="flex space-x-2 sm:space-x-3">
               <RouterLink
                 v-for="(social, index) in socialLinks"
                 :key="index"
                 :to="social.to"
-                class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-gray-700 rounded-lg sm:rounded-xl flex items-center justify-center hover:bg-[#438fab] transition-all duration-300 transform hover:scale-110"
+                class="w-6 h-6 sm:w-8 sm:h-8 bg-gray-700 rounded-lg flex items-center justify-center hover:bg-[#438fab] transition-all duration-300 transform hover:scale-110"
               >
-                <i :class="social.icon" class="text-xs sm:text-sm md:text-base"></i>
+                <i :class="social.icon" class="text-xs sm:text-sm"></i>
               </RouterLink>
             </div>
           </div>
 
           <!-- Colonne 2 - Produit -->
           <div class="animate-fade-in-up" style="animation-delay: 0.1s">
-            <h3 class="font-bold text-base sm:text-lg md:text-xl lg:text-2xl mb-3 sm:mb-4 md:mb-6 text-white">Produit</h3>
-            <ul class="space-y-1 sm:space-y-2 md:space-y-3">
+            <h3 class="font-bold text-sm sm:text-base md:text-lg mb-2 sm:mb-3 md:mb-4 text-white">Produit</h3>
+            <ul class="space-y-1 sm:space-y-1.5 md:space-y-2">
               <li v-for="link in productLinks" :key="link.to">
                 <RouterLink
                   :to="link.to"
-                  class="text-gray-300 hover:text-white transition-all duration-300 flex items-center group transform hover:translate-x-2 text-xs sm:text-sm md:text-base"
+                  class="text-gray-300 hover:text-white transition-all duration-300 flex items-center group transform hover:translate-x-2 text-xs sm:text-sm"
                 >
-                  <i
-                    class="bx bx-chevron-right text-[#438fab] mr-1 sm:mr-2 group-hover:translate-x-1 transition-transform duration-300"
-                  ></i>
+                  <i class="bx bx-chevron-right text-[#438fab] mr-1 sm:mr-2 group-hover:translate-x-1 transition-transform duration-300"></i>
                   {{ link.text }}
                 </RouterLink>
               </li>
@@ -386,16 +372,14 @@
 
           <!-- Colonne 3 - Entreprise -->
           <div class="animate-fade-in-up" style="animation-delay: 0.2s">
-            <h3 class="font-bold text-base sm:text-lg md:text-xl lg:text-2xl mb-3 sm:mb-4 md:mb-6 text-white">Entreprise</h3>
-            <ul class="space-y-1 sm:space-y-2 md:space-y-3">
+            <h3 class="font-bold text-sm sm:text-base md:text-lg mb-2 sm:mb-3 md:mb-4 text-white">Entreprise</h3>
+            <ul class="space-y-1 sm:space-y-1.5 md:space-y-2">
               <li v-for="link in companyLinks" :key="link.to">
                 <RouterLink
                   :to="link.to"
-                  class="text-gray-300 hover:text-white transition-all duration-300 flex items-center group transform hover:translate-x-2 text-xs sm:text-sm md:text-base"
+                  class="text-gray-300 hover:text-white transition-all duration-300 flex items-center group transform hover:translate-x-2 text-xs sm:text-sm"
                 >
-                  <i
-                    class="bx bx-chevron-right text-[#438fab] mr-1 sm:mr-2 group-hover:translate-x-1 transition-transform duration-300"
-                  ></i>
+                  <i class="bx bx-chevron-right text-[#438fab] mr-1 sm:mr-2 group-hover:translate-x-1 transition-transform duration-300"></i>
                   {{ link.text }}
                 </RouterLink>
               </li>
@@ -404,16 +388,14 @@
 
           <!-- Colonne 4 - Support -->
           <div class="animate-fade-in-up" style="animation-delay: 0.3s">
-            <h3 class="font-bold text-base sm:text-lg md:text-xl lg:text-2xl mb-3 sm:mb-4 md:mb-6 text-white">Support</h3>
-            <ul class="space-y-1 sm:space-y-2 md:space-y-3">
+            <h3 class="font-bold text-sm sm:text-base md:text-lg mb-2 sm:mb-3 md:mb-4 text-white">Support</h3>
+            <ul class="space-y-1 sm:space-y-1.5 md:space-y-2">
               <li v-for="link in supportLinks" :key="link.to">
                 <RouterLink
                   :to="link.to"
-                  class="text-gray-300 hover:text-white transition-all duration-300 flex items-center group transform hover:translate-x-2 text-xs sm:text-sm md:text-base"
+                  class="text-gray-300 hover:text-white transition-all duration-300 flex items-center group transform hover:translate-x-2 text-xs sm:text-sm"
                 >
-                  <i
-                    class="bx bx-chevron-right text-[#438fab] mr-1 sm:mr-2 group-hover:translate-x-1 transition-transform duration-300"
-                  ></i>
+                  <i class="bx bx-chevron-right text-[#438fab] mr-1 sm:mr-2 group-hover:translate-x-1 transition-transform duration-300"></i>
                   {{ link.text }}
                 </RouterLink>
               </li>
@@ -422,25 +404,21 @@
         </div>
 
         <!-- Newsletter -->
-        <div
-          class="bg-gradient-to-r from-[#438fab] to-[#3190a5] rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10 mb-6 md:mb-8 lg:mb-12 shadow-2xl transform transition-all duration-500 hover:scale-105 animate-fade-in-up"
-        >
+        <div class="bg-gradient-to-r from-[#438fab] to-[#3190a5] rounded-xl p-4 sm:p-6 md:p-8 mb-4 md:mb-6 lg:mb-8 shadow-2xl transform transition-all duration-500 hover:scale-105 animate-fade-in-up">
           <div class="flex flex-col lg:flex-row items-center justify-between">
-            <div class="mb-4 lg:mb-0 lg:mr-8 text-center lg:text-left">
-              <h3 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1 sm:mb-2">Restez informé</h3>
-              <p class="text-white/90 text-xs sm:text-sm md:text-base">Recevez nos dernières actualités et conseils</p>
+            <div class="mb-3 lg:mb-0 lg:mr-8 text-center lg:text-left">
+              <h3 class="text-base sm:text-lg md:text-xl font-bold text-white mb-1">Restez informé</h3>
+              <p class="text-white/90 text-xs sm:text-sm">Recevez nos dernières actualités et conseils</p>
             </div>
             <div class="flex-1 max-w-md w-full">
-              <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 md:space-x-3">
+              <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                 <input
                   type="email"
                   placeholder="Votre email"
-                  class="flex-1 px-3 py-2 sm:px-4 sm:py-3 rounded-lg sm:rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transform transition-transform hover:scale-105 duration-300 text-xs sm:text-sm"
+                  class="flex-1 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transform transition-transform hover:scale-105 duration-300 text-xs sm:text-sm"
                 />
                 <RouterLink to="/newsletter-subscribe" class="sm:w-auto">
-                  <button
-                    class="bg-white text-[#438fab] px-4 py-2 sm:px-6 sm:py-3 rounded-lg sm:rounded-xl font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 whitespace-nowrap w-full sm:w-auto text-xs sm:text-sm"
-                  >
+                  <button class="bg-white text-[#438fab] px-3 py-1.5 sm:px-5 sm:py-2 rounded-lg font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 whitespace-nowrap w-full sm:w-auto text-xs sm:text-sm">
                     S'abonner
                   </button>
                 </RouterLink>
@@ -450,12 +428,12 @@
         </div>
 
         <!-- Bottom bar -->
-        <div class="border-t border-gray-700 pt-4 sm:pt-6 md:pt-8 animate-fade-in-up">
+        <div class="border-t border-gray-700 pt-3 sm:pt-4 md:pt-6 animate-fade-in-up">
           <div class="flex flex-col md:flex-row justify-between items-center">
-            <div class="text-gray-400 text-xs mb-3 md:mb-0">
+            <div class="text-gray-400 text-xs mb-2 md:mb-0">
               <p>&copy; 2024 Secure Check. Tous droits réservés.</p>
             </div>
-            <div class="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6 text-xs">
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 text-xs">
               <RouterLink
                 v-for="link in legalLinks"
                 :key="link.to"
@@ -474,10 +452,10 @@
     <button
       v-show="showScrollTop"
       @click="scrollToTop"
-      class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[#438fab] text-white rounded-full shadow-lg hover:bg-[#3190a5] transition-all duration-300 flex items-center justify-center z-50 group animate-fade-in-up"
+      class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 w-8 h-8 sm:w-10 sm:h-10 bg-[#438fab] text-white rounded-full shadow-lg hover:bg-[#3190a5] transition-all duration-300 flex items-center justify-center z-50 group animate-fade-in-up"
       aria-label="Retour en haut"
     >
-      <i class="bx bx-chevron-up text-lg sm:text-xl md:text-2xl group-hover:-translate-y-1 transition-transform"></i>
+      <i class="bx bx-chevron-up text-base sm:text-lg md:text-xl group-hover:-translate-y-1 transition-transform"></i>
     </button>
   </div>
 </template>
@@ -491,8 +469,6 @@ import header1 from "@/assets/images/Header 1.jpg";
 import header2 from "@/assets/images/Header 2.jpg";
 import header3 from "@/assets/images/Header 3.jpg";
 import header4 from "@/assets/images/Header 4.jpg";
-
-// ===== IMPORTS DES IMAGES =====
 import logo from "@/assets/images/logo.png";
 
 // State pour le bouton de retour en haut
@@ -743,45 +719,6 @@ const integrations = [
 .integration-item.animate-fade-in-up {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* Custom animations */
-.feature-enter-active {
-  transition: all 0.5s ease;
-}
-
-.feature-enter-from {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-/* Styles spécifiques pour les très grands écrans */
-@media (min-width: 2000px) {
-  .max-w-7xl {
-    max-width: 90%;
-  }
-
-  .max-w-4xl {
-    max-width: 70%;
-  }
-}
-
-@media (min-width: 2500px) {
-  .max-w-7xl {
-    max-width: 80%;
-  }
-
-  .max-w-4xl {
-    max-width: 60%;
-  }
-}
-
-/* Améliorations pour mobile */
-@media (max-width: 640px) {
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
 }
 
 /* Assurer que les images sont responsives */

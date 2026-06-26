@@ -1,6 +1,5 @@
 <template>
-  <div class="w-full  rounded-lg shadow-lg bg-white p-2">
-   
+  <div class="w-full rounded-lg shadow-lg bg-white p-2">
     <form @submit.prevent="submitForm" class="grid grid-cols-2 gap-4">
       <div>
         <label class="block mb-2 text-gray-700">Prénom <span class="text-red-600">*</span></label>
@@ -46,23 +45,63 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const company = ref({
-  firstname:'',
-  lastname:'',
-  email:'',
-  title:'',
-  role:'',
-  password:'',
-  phone:'',
-  nom:''
+// Interface pour les données du formulaire
+interface CompanyFormData {
+  firstname: string;
+  lastname: string;
+  email: string;
+  title: string;
+  role: string;
+  password: string;
+  phone: string;
+  nom: string;
+}
+
+// Type pour l'entreprise à créer (correspond à CompanyInput dans le parent)
+interface CompanyInput {
+  nom: string;
+  logo?: string;
+  qrCode?: string;
+  lien?: string;
+  phone?: string;
+  email?: string;
+  members?: string[];
+}
+
+const company = ref<CompanyFormData>({
+  firstname: '',
+  lastname: '',
+  email: '',
+  title: '',
+  role: '',
+  password: '',
+  phone: '',
+  nom: ''
 })
 
+// Émits avec le type correct
 const emit = defineEmits<{
-  (e:'add-company', company:unknown):void
+  (e: 'add-company', company: CompanyInput): void
 }>()
 
-function submitForm(){
-  emit('add-company', { ...company.value })
-  Object.keys(company.value).forEach(k=>company.value[k as keyof typeof company.value]='')
+function submitForm(): void {
+  // Construire l'objet entreprise avec les données du formulaire
+  const companyData: CompanyInput = {
+    nom: company.value.nom,
+    email: company.value.email,
+    phone: company.value.phone,
+    logo: `https://via.placeholder.com/80?text=${company.value.nom}`,
+    qrCode: `https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${company.value.nom}`,
+    lien: '#',
+    members: [`${company.value.firstname} ${company.value.lastname}`]
+  }
+
+  // Émettre l'événement avec les données
+  emit('add-company', companyData)
+
+  // Réinitialiser le formulaire
+  Object.keys(company.value).forEach(key => {
+    company.value[key as keyof CompanyFormData] = ''
+  })
 }
 </script>

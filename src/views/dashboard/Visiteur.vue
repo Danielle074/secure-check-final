@@ -117,7 +117,6 @@
 
         <!-- Table normal sans scroll -->
         <div class="bg-white rounded-xl shadow-md w-full overflow-hidden">
-
           <table class="w-full text-left border-collapse min-w-max">
             <thead class="bg-[#0297B8] text-white">
               <tr>
@@ -160,13 +159,13 @@
                 <td class="p-4 text-gray-500 text-xl relative border-none whitespace-nowrap">
                   <div class="relative">
                     <button
-                      @click="emp.showActions = !emp.showActions"
+                      @click="toggleActions(emp.id)"
                       class="flex items-center justify-center gap-1 px-3 py-1 hover:bg-gray-50 whitespace-nowrap"
                     >
                       <i class="bx bx-dots-vertical text-lg"></i>
                     </button>
                     <div
-                      v-if="emp.showActions"
+                      v-if="getShowActions(emp.id)"
                       class="absolute right-0 mt-2 bg-white rounded-md shadow-md flex flex-col gap-1 w-36 z-10"
                     >
                       <button
@@ -196,7 +195,6 @@
               </tr>
             </tbody>
           </table>
-
         </div>
 
         <!-- Pagination -->
@@ -258,55 +256,124 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 
+// Définition de l'interface Employee
+interface Employee {
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+  clockIn: string;
+  clockOut: string;
+  totalHours: string;
+  breakTime: string;
+  overtime: string;
+  status: string;
+  dept: string;
+  showActions?: boolean; // Propriété optionnelle
+}
+
 /* UI state */
-const showList = ref(true);
-const searchQuery = ref("");
-const showFilterPanel = ref(false);
-const yearDropdown = ref(false);
-const perPageDropdown = ref(false);
-const perPage = ref(15);
-const currentPage = ref(1);
-const filterStatus = ref("");
-const filterDept = ref("");
-const year = ref(2025);
+const showList = ref<boolean>(true);
+const searchQuery = ref<string>("");
+const showFilterPanel = ref<boolean>(false);
+const yearDropdown = ref<boolean>(false);
+const perPageDropdown = ref<boolean>(false);
+const perPage = ref<number>(15);
+const currentPage = ref<number>(1);
+const filterStatus = ref<string>("");
+const filterDept = ref<string>("");
+const year = ref<number>(2025);
 
 /* Date navigation */
-const dates = ref(["Monday 05 October", "Tuesday 06 October", "Wednesday 07 October", "Thursday 08 October", "Friday 09 October"]);
-const currentDate = ref("Monday 05 October");
-function prevDay() { const index = dates.value.indexOf(currentDate.value); if (index > 0) currentDate.value = dates.value[index - 1]; }
-function nextDay() { const index = dates.value.indexOf(currentDate.value); if (index < dates.value.length - 1) currentDate.value = dates.value[index + 1]; }
+const dates = ref<string[]>(["Monday 05 October", "Tuesday 06 October", "Wednesday 07 October", "Thursday 08 October", "Friday 09 October"]);
+const currentDate = ref<string>("Monday 05 October");
+
+function prevDay(): void {
+  const index = dates.value.indexOf(currentDate.value);
+  if (index > 0) currentDate.value = dates.value[index - 1];
+}
+
+function nextDay(): void {
+  const index = dates.value.indexOf(currentDate.value);
+  if (index < dates.value.length - 1) currentDate.value = dates.value[index + 1];
+}
 
 /* Dropdowns */
-function toggleYearDropdown() { yearDropdown.value = !yearDropdown.value; }
-function selectYear(y: number) { year.value = y; yearDropdown.value = false; }
-function toggleFilter() { showFilterPanel.value = !showFilterPanel.value; }
-function togglePerPageDropdown() { perPageDropdown.value = !perPageDropdown.value; }
-function setPerPage(n: number) { perPage.value = n; perPageDropdown.value = false; currentPage.value = 1; }
-function goToPage(n: number) { if (n < 1) n = 1; if (n > totalPages.value) n = totalPages.value; currentPage.value = n; }
+function toggleYearDropdown(): void {
+  yearDropdown.value = !yearDropdown.value;
+}
+
+function selectYear(y: number): void {
+  year.value = y;
+  yearDropdown.value = false;
+}
+
+function toggleFilter(): void {
+  showFilterPanel.value = !showFilterPanel.value;
+}
+
+function togglePerPageDropdown(): void {
+  perPageDropdown.value = !perPageDropdown.value;
+}
+
+function setPerPage(n: number): void {
+  perPage.value = n;
+  perPageDropdown.value = false;
+  currentPage.value = 1;
+}
+
+function goToPage(n: number): void {
+  if (n < 1) n = 1;
+  if (n > totalPages.value) n = totalPages.value;
+  currentPage.value = n;
+}
+
+/* Toggle actions pour un employé spécifique */
+function toggleActions(employeeId: string): void {
+  const employee = employees.value.find(emp => emp.id === employeeId);
+  if (employee) {
+    employee.showActions = !employee.showActions;
+  }
+}
+
+/* Récupérer l'état showActions d'un employé */
+function getShowActions(employeeId: string): boolean {
+  const employee = employees.value.find(emp => emp.id === employeeId);
+  return employee?.showActions || false;
+}
 
 /* Actions */
-function editEmployee(emp: any) { alert(`Modifier ${emp.name}`); }
-function deleteEmployee(emp: any) { alert(`Supprimer ${emp.name}`); }
-function addEmployee(emp: any) { alert(`Ajouter ${emp.name}`); }
+function editEmployee(emp: Employee): void {
+  alert(`Modifier ${emp.name}`);
+  emp.showActions = false;
+}
 
-/* Employees data */
-const employees = ref([
-  { id: "E01", name: "Jerome Bell", email: "nuray@alignui.com", image: "https://randomuser.me/api/portraits/men/1.jpg", clockIn: "10:02 AM", clockOut: "09:10 PM", totalHours: "8h 58m", breakTime: "10:00–10:15", overtime: "2h 10", status: "On time", dept: "Engineering" },
-  { id: "E02", name: "Liam Carter", email: "liam@alignui.com", image: "https://randomuser.me/api/portraits/men/2.jpg", clockIn: "12:02 PM", clockOut: "09:00 PM", totalHours: "8h 58m", breakTime: "11:00–11:10", overtime: "-", status: "Late", dept: "Sales" },
-  { id: "E03", name: "Maya Ross", email: "maya@alignui.com", image: "https://randomuser.me/api/portraits/women/3.jpg", clockIn: "10:02 AM", clockOut: "09:10 PM", totalHours: "8h 58m", breakTime: "11:00–11:10", overtime: "2h 10", status: "Late", dept: "Design" },
-  { id: "E04", name: "Ethan Cole", email: "ethan@alignui.com", image: "https://randomuser.me/api/portraits/men/4.jpg", clockIn: "10:02 AM", clockOut: "09:10 PM", totalHours: "8h 58m", breakTime: "12:00–12:20", overtime: "2h 10", status: "On time", dept: "Engineering" },
-  { id: "E05", name: "Ava Brooks", email: "ava@alignui.com", image: "https://randomuser.me/api/portraits/women/5.jpg", clockIn: "10:02 AM", clockOut: "07:00 PM", totalHours: "8h 58m", breakTime: "10:00–10:15", overtime: "-", status: "On time", dept: "Sales" },
-  { id: "E06", name: "Noah Reed", email: "noah@alignui.com", image: "https://randomuser.me/api/portraits/men/6.jpg", clockIn: "10:02 AM", clockOut: "09:10 PM", totalHours: "8h 58m", breakTime: "11:00–11:10", overtime: "2h 10", status: "On time", dept: "Design" },
-  { id: "E07", name: "Chloe Dean", email: "chloe@alignui.com", image: "https://randomuser.me/api/portraits/women/7.jpg", clockIn: "10:02 AM", clockOut: "07:00 PM", totalHours: "8h 58m", breakTime: "12:00–12:20", overtime: "-", status: "On time", dept: "Engineering" },
-  { id: "E08", name: "Owen Hayes", email: "owen@alignui.com", image: "https://randomuser.me/api/portraits/men/8.jpg", clockIn: "10:02 AM", clockOut: "09:10 PM", totalHours: "8h 58m", breakTime: "10:00–10:15", overtime: "2h 10", status: "On time", dept: "Sales" },
-  { id: "E09", name: "Zara Lane", email: "zara@alignui.com", image: "https://randomuser.me/api/portraits/women/9.jpg", clockIn: "09:30 AM", clockOut: "06:30 PM", totalHours: "9h 0m", breakTime: "11:30–11:50", overtime: "-", status: "Late", dept: "Design" },
-  { id: "E10", name: "Lucas Ford", email: "zara@alignui.com", image: "https://randomuser.me/api/portraits/women/9.jpg", clockIn: "09:30 AM", clockOut: "06:30 PM", totalHours: "9h 0m", breakTime: "11:30–11:50", overtime: "-", status: "Late", dept: "Design" },
+function deleteEmployee(emp: Employee): void {
+  alert(`Supprimer ${emp.name}`);
+  emp.showActions = false;
+}
+
+function addEmployee(emp: Employee): void {
+  alert(`Ajouter ${emp.name}`);
+  emp.showActions = false;
+}
+
+/* Employees data avec showActions */
+const employees = ref<Employee[]>([
+  { id: "E01", name: "Jerome Bell", email: "nuray@alignui.com", image: "https://randomuser.me/api/portraits/men/1.jpg", clockIn: "10:02 AM", clockOut: "09:10 PM", totalHours: "8h 58m", breakTime: "10:00–10:15", overtime: "2h 10", status: "On time", dept: "Engineering", showActions: false },
+  { id: "E02", name: "Liam Carter", email: "liam@alignui.com", image: "https://randomuser.me/api/portraits/men/2.jpg", clockIn: "12:02 PM", clockOut: "09:00 PM", totalHours: "8h 58m", breakTime: "11:00–11:10", overtime: "-", status: "Late", dept: "Sales", showActions: false },
+  { id: "E03", name: "Maya Ross", email: "maya@alignui.com", image: "https://randomuser.me/api/portraits/women/3.jpg", clockIn: "10:02 AM", clockOut: "09:10 PM", totalHours: "8h 58m", breakTime: "11:00–11:10", overtime: "2h 10", status: "Late", dept: "Design", showActions: false },
+  { id: "E04", name: "Ethan Cole", email: "ethan@alignui.com", image: "https://randomuser.me/api/portraits/men/4.jpg", clockIn: "10:02 AM", clockOut: "09:10 PM", totalHours: "8h 58m", breakTime: "12:00–12:20", overtime: "2h 10", status: "On time", dept: "Engineering", showActions: false },
+  { id: "E05", name: "Ava Brooks", email: "ava@alignui.com", image: "https://randomuser.me/api/portraits/women/5.jpg", clockIn: "10:02 AM", clockOut: "07:00 PM", totalHours: "8h 58m", breakTime: "10:00–10:15", overtime: "-", status: "On time", dept: "Sales", showActions: false },
+  { id: "E06", name: "Noah Reed", email: "noah@alignui.com", image: "https://randomuser.me/api/portraits/men/6.jpg", clockIn: "10:02 AM", clockOut: "09:10 PM", totalHours: "8h 58m", breakTime: "11:00–11:10", overtime: "2h 10", status: "On time", dept: "Design", showActions: false },
+  { id: "E07", name: "Chloe Dean", email: "chloe@alignui.com", image: "https://randomuser.me/api/portraits/women/7.jpg", clockIn: "10:02 AM", clockOut: "07:00 PM", totalHours: "8h 58m", breakTime: "12:00–12:20", overtime: "-", status: "On time", dept: "Engineering", showActions: false },
+  { id: "E08", name: "Owen Hayes", email: "owen@alignui.com", image: "https://randomuser.me/api/portraits/men/8.jpg", clockIn: "10:02 AM", clockOut: "09:10 PM", totalHours: "8h 58m", breakTime: "10:00–10:15", overtime: "2h 10", status: "On time", dept: "Sales", showActions: false },
+  { id: "E09", name: "Zara Lane", email: "zara@alignui.com", image: "https://randomuser.me/api/portraits/women/9.jpg", clockIn: "09:30 AM", clockOut: "06:30 PM", totalHours: "9h 0m", breakTime: "11:30–11:50", overtime: "-", status: "Late", dept: "Design", showActions: false },
+  { id: "E10", name: "Lucas Ford", email: "zara@alignui.com", image: "https://randomuser.me/api/portraits/women/9.jpg", clockIn: "09:30 AM", clockOut: "06:30 PM", totalHours: "9h 0m", breakTime: "11:30–11:50", overtime: "-", status: "Late", dept: "Design", showActions: false },
 ]);
 
-employees.value = employees.value.map(emp => ({ ...emp, showActions: false }));
-
 /* Computed filtered + paginated */
-const filteredEmployees = computed(() => {
+const filteredEmployees = computed<Employee[]>(() => {
   return employees.value.filter(
     emp =>
       emp.name.toLowerCase().includes(searchQuery.value.toLowerCase()) &&
@@ -314,12 +381,15 @@ const filteredEmployees = computed(() => {
       (filterDept.value ? emp.dept === filterDept.value : true)
   );
 });
-const totalPages = computed(() => Math.ceil(filteredEmployees.value.length / perPage.value));
-const paginatedEmployees = computed(() => {
+
+const totalPages = computed<number>(() => Math.ceil(filteredEmployees.value.length / perPage.value));
+
+const paginatedEmployees = computed<Employee[]>(() => {
   const start = (currentPage.value - 1) * perPage.value;
   return filteredEmployees.value.slice(start, start + perPage.value);
 });
-const pageNumbers = computed(() => Array.from({ length: totalPages.value }, (_, i) => i + 1));
+
+const pageNumbers = computed<number[]>(() => Array.from({ length: totalPages.value }, (_, i) => i + 1));
 </script>
 
 <style scoped>

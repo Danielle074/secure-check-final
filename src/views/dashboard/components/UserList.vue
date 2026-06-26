@@ -1,74 +1,74 @@
 <template>
   <!-- Affichage conditionnel Liste des utilisateurs -->
-    <div v-if="showList " class="min-h-screen p-6">
-      <!-- Attendance header -->
-      <div class="flex items-center justify-between mb-4">
-        <div class="flex items-center gap-3">
-          <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
-            <button @click="prevDay" class="p-1 rounded-md hover:bg-gray-100">
-              <i class="bx bx-chevron-left text-xl text-gray-600"></i>
+  <div v-if="showList" class="min-h-screen p-6">
+    <!-- Attendance header -->
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+          <button @click="prevDay" class="p-1 rounded-md hover:bg-gray-100">
+            <i class="bx bx-chevron-left text-xl text-gray-600"></i>
+          </button>
+          <div class="text-gray-700 font-medium">
+            <div class="text-sm">{{ currentDate }}</div>
+          </div>
+          <button @click="nextDay" class="p-1 rounded-md hover:bg-gray-100">
+            <i class="bx bx-chevron-right text-xl text-gray-600"></i>
+          </button>
+          <div class="ml-3 relative">
+            <button
+              @click="toggleYearDropdown"
+              class="flex items-center gap-2 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-50"
+            >
+              <span class="font-medium">{{ year }}</span>
+              <i class="bx bx-chevron-down text-gray-600"></i>
             </button>
-            <div class="text-gray-700 font-medium">
-              <div class="text-sm">{{ currentDate }}</div>
-            </div>
-            <button @click="nextDay" class="p-1 rounded-md hover:bg-gray-100">
-              <i class="bx bx-chevron-right text-xl text-gray-600"></i>
-            </button>
-            <div class="ml-3 relative">
+            <div
+              v-if="yearDropdown"
+              class="absolute left-0 mt-2 bg-white border rounded-md shadow-md py-2 w-28 z-10"
+            >
               <button
-                @click="toggleYearDropdown"
-                class="flex items-center gap-2 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-50"
+                class="w-full text-left px-3 py-1 hover:bg-gray-100"
+                @click="selectYear(2024)"
               >
-                <span class="font-medium">{{ year }}</span>
-                <i class="bx bx-chevron-down text-gray-600"></i>
+                2024
               </button>
-              <div
-                v-if="yearDropdown"
-                class="absolute left-0 mt-2 bg-white border rounded-md shadow-md py-2 w-28 z-10"
+              <button
+                class="w-full text-left px-3 py-1 hover:bg-gray-100"
+                @click="selectYear(2025)"
               >
-                <button
-                  class="w-full text-left px-3 py-1 hover:bg-gray-100"
-                  @click="selectYear(2024)"
-                >
-                  2024
-                </button>
-                <button
-                  class="w-full text-left px-3 py-1 hover:bg-gray-100"
-                  @click="selectYear(2025)"
-                >
-                  2025
-                </button>
-                <button
-                  class="w-full text-left px-3 py-1 hover:bg-gray-100"
-                  @click="selectYear(2026)"
-                >
-                  2026
-                </button>
-              </div>
+                2025
+              </button>
+              <button
+                class="w-full text-left px-3 py-1 hover:bg-gray-100"
+                @click="selectYear(2026)"
+              >
+                2026
+              </button>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="flex items-center gap-3">
-          <div class="relative">
-            <input
-              v-model="searchQuery"
-              type="text"
-              placeholder="Search"
-              class="border border-gray-300 rounded-lg px-10 py-2 focus:outline-none focus:ring-2 focus:ring-[#02739A]"
-            />
-            <i class="bx bx-search absolute left-3 top-2.5 text-gray-400 text-lg"></i>
-          </div>
+      <div class="flex items-center gap-3">
+        <div class="relative">
+          <input
+            v-model="searchQuery"
+            type="text"
+            placeholder="Search"
+            class="border border-gray-300 rounded-lg px-10 py-2 focus:outline-none focus:ring-2 focus:ring-[#02739A]"
+          />
+          <i class="bx bx-search absolute left-3 top-2.5 text-gray-400 text-lg"></i>
+        </div>
 
-          <button
-            @click="toggleFilter"
-            class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-lg hover:bg-gray-50"
-          >
-            <i class="bx bx-filter-alt text-gray-600"></i>
-            <span class="text-sm">Filter</span>
-          </button>
+        <button
+          @click="toggleFilter"
+          class="flex items-center gap-2 border border-gray-300 px-3 py-2 rounded-lg hover:bg-gray-50"
+        >
+          <i class="bx bx-filter-alt text-gray-600"></i>
+          <span class="text-sm">Filter</span>
+        </button>
 
-            <!-- Bouton Add New Employee qui redirige vers AddUser.vue -->
+        <!-- Bouton Add New Employee qui redirige vers AddUser.vue -->
         <router-link
           to="/app/utilisateur/add"
           class="bg-[#0297B8] text-white px-4 py-2 rounded-lg shadow-md hover:bg-[#02739A] transition flex items-center gap-2"
@@ -76,228 +76,275 @@
           <i class="bx bx-plus text-lg"></i>
           Add New Employee
         </router-link>
-        </div>
-      </div>
-<!-- Conteneur scrollable -->
-<div class="bg-white rounded-xl shadow-md overflow-hidden w-full">
-  <div class="overflow-x-auto w-full" style="max-height: 500px;">
-    <table class="w-full text-left border-collapse min-w-max">
-      <thead class="bg-[#0297B8] text-white">
-        <tr>
-          <th class="p-4 border-none whitespace-nowrap">Employee name</th>
-          <th class="p-4 border-none whitespace-nowrap">Clock-in & Out</th>
-          <th class="p-4 border-none whitespace-nowrap">Break time</th>
-          <th class="p-4 border-none whitespace-nowrap">Overtime</th>
-          <th class="p-4 border-none whitespace-nowrap">Status</th>
-          <th class="p-4 border-none whitespace-nowrap">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="(emp, index) in paginatedEmployees"
-          :key="emp.id"
-          :class="[ index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200', 'hover:bg-gray-50' ]"
-        >
-          <td class="p-4 flex items-center gap-3 border-none whitespace-nowrap">
-            <input type="checkbox" class="h-4 w-4" />
-            <img :src="emp.image" alt="avatar" class="h-10 w-10 rounded-full object-cover" />
-            <div>
-              <p class="font-semibold text-gray-800">{{ emp.name }}</p>
-              <p class="text-gray-400 text-sm">{{ emp.email }}</p>
-            </div>
-          </td>
-          <td class="p-4 border-none whitespace-nowrap">
-            <div class="text-sm">{{ emp.clockIn }} — {{ emp.clockOut }}</div>
-            <div class="text-xs text-gray-400">{{ emp.totalHours }}</div>
-          </td>
-          <td class="p-4 border-none whitespace-nowrap">{{ emp.breakTime }}</td>
-          <td class="p-4 border-none whitespace-nowrap">{{ emp.overtime }}</td>
-          <td class="p-4 border-none whitespace-nowrap">
-            <span
-              :class="emp.status === 'On time' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'"
-              class="px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap"
-            >
-              {{ emp.status }}
-            </span>
-          </td>
-          <td class="p-4 text-gray-500 text-xl relative border-none whitespace-nowrap">
-            <div class="relative">
-              <button
-                @click="emp.showActions = !emp.showActions"
-                class="flex items-center justify-center gap-1 px-3 py-1 hover:bg-gray-50 whitespace-nowrap"
-              >
-                <i class="bx bx-dots-vertical text-lg"></i>
-              </button>
-              <div
-                v-if="emp.showActions"
-                class="absolute right-0 mt-2 bg-white rounded-md shadow-md flex flex-col gap-1 w-36 z-10"
-              >
-                <button
-                  @click="editEmployee(emp)"
-                  class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 text-black text-sm whitespace-nowrap"
-                >
-                  <i class="bx bx-pencil"></i> Modifier
-                </button>
-                <button
-                  @click="deleteEmployee(emp)"
-                  class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 text-black text-sm whitespace-nowrap"
-                >
-                  <i class="bx bx-trash"></i> Supprimer
-                </button>
-                <button
-                  @click="addEmployee(emp)"
-                  class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 text-black text-sm whitespace-nowrap"
-                >
-                  <i class="bx bx-plus-circle"></i> Ajouter
-                </button>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr v-if="paginatedEmployees.length === 0">
-          <td colspan="6" class="p-6 text-center text-gray-500 border-none">No visitors found.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-
-      <!-- Table Footer: per-page + pagination -->
-      <div class="flex items-center justify-between px-4 py-3 bg-white border-t">
-        <div class="flex items-center gap-2">
-          <span class="text-gray-600 text-sm">Show</span>
-          <div class="relative">
-            <button
-              @click="togglePerPageDropdown"
-              class="flex items-center gap-1 border border-gray-300 px-2 py-1 rounded-md hover:bg-gray-50"
-            >
-              <span class="text-sm font-medium">{{ perPage }}</span>
-              <i class="bx bx-chevron-down text-gray-500"></i>
-            </button>
-            <div
-              v-if="perPageDropdown"
-              class="absolute left-0 mt-1 w-24 bg-white border rounded-md shadow-md z-10"
-            >
-              <button class="w-full px-3 py-1 text-left hover:bg-gray-100" @click="setPerPage(15)">
-                15
-              </button>
-              <button class="w-full px-3 py-1 text-left hover:bg-gray-100" @click="setPerPage(10)">
-                10
-              </button>
-              <button class="w-full px-3 py-1 text-left hover:bg-gray-100" @click="setPerPage(5)">
-                5
-              </button>
-            </div>
-          </div>
-          <span class="text-gray-600 text-sm">Employees per page</span>
-        </div>
-
-        <div class="flex items-center gap-1">
-          <button
-            @click="goToPage(currentPage - 1)"
-            :disabled="currentPage === 1"
-            class="px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-50 disabled:opacity-50"
-          >
-            <i class="bx bx-chevron-left text-lg"></i>
-          </button>
-
-          <button
-            v-for="page in pageNumbers"
-            :key="page"
-            @click="goToPage(page)"
-            :class="[
-              'px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-50',
-              currentPage === page ? 'bg-[#02739A] text-white border-[#02739A]' : '',
-            ]"
-          >
-            {{ page }}
-          </button>
-
-          <button
-            @click="goToPage(currentPage + 1)"
-            :disabled="currentPage === totalPages"
-            class="px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-50 disabled:opacity-50"
-          >
-            <i class="bx bx-chevron-right text-lg"></i>
-          </button>
-        </div>
       </div>
     </div>
 
+    <!-- Conteneur scrollable -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden w-full">
+      <div class="overflow-x-auto w-full" style="max-height: 500px;">
+        <table class="w-full text-left border-collapse min-w-max">
+          <thead class="bg-[#0297B8] text-white">
+            <tr>
+              <th class="p-4 border-none whitespace-nowrap">Employee name</th>
+              <th class="p-4 border-none whitespace-nowrap">Clock-in & Out</th>
+              <th class="p-4 border-none whitespace-nowrap">Break time</th>
+              <th class="p-4 border-none whitespace-nowrap">Overtime</th>
+              <th class="p-4 border-none whitespace-nowrap">Status</th>
+              <th class="p-4 border-none whitespace-nowrap">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(emp, index) in paginatedEmployees"
+              :key="emp.id"
+              :class="[index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200', 'hover:bg-gray-50']"
+            >
+              <td class="p-4 flex items-center gap-3 border-none whitespace-nowrap">
+                <input type="checkbox" class="h-4 w-4" />
+                <img :src="emp.image" alt="avatar" class="h-10 w-10 rounded-full object-cover" />
+                <div>
+                  <p class="font-semibold text-gray-800">{{ emp.name }}</p>
+                  <p class="text-gray-400 text-sm">{{ emp.email }}</p>
+                </div>
+              </td>
+              <td class="p-4 border-none whitespace-nowrap">
+                <div class="text-sm">{{ emp.clockIn }} — {{ emp.clockOut }}</div>
+                <div class="text-xs text-gray-400">{{ emp.totalHours }}</div>
+              </td>
+              <td class="p-4 border-none whitespace-nowrap">{{ emp.breakTime }}</td>
+              <td class="p-4 border-none whitespace-nowrap">{{ emp.overtime }}</td>
+              <td class="p-4 border-none whitespace-nowrap">
+                <span
+                  :class="
+                    emp.status === 'On time'
+                      ? 'bg-green-100 text-green-600'
+                      : 'bg-red-100 text-red-600'
+                  "
+                  class="px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap"
+                >
+                  {{ emp.status }}
+                </span>
+              </td>
+              <td class="p-4 text-gray-500 text-xl relative border-none whitespace-nowrap">
+                <div class="relative">
+                  <button
+                    @click="toggleActions(emp.id)"
+                    class="flex items-center justify-center gap-1 px-3 py-1 hover:bg-gray-50 whitespace-nowrap"
+                  >
+                    <i class="bx bx-dots-vertical text-lg"></i>
+                  </button>
+                  <div
+                    v-if="getShowActions(emp.id)"
+                    class="absolute right-0 mt-2 bg-white rounded-md shadow-md flex flex-col gap-1 w-36 z-10"
+                  >
+                    <button
+                      @click="editEmployee(emp)"
+                      class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 text-black text-sm whitespace-nowrap"
+                    >
+                      <i class="bx bx-pencil"></i> Modifier
+                    </button>
+                    <button
+                      @click="deleteEmployee(emp)"
+                      class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 text-black text-sm whitespace-nowrap"
+                    >
+                      <i class="bx bx-trash"></i> Supprimer
+                    </button>
+                    <button
+                      @click="addEmployee(emp)"
+                      class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 text-black text-sm whitespace-nowrap"
+                    >
+                      <i class="bx bx-plus-circle"></i> Ajouter
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr v-if="paginatedEmployees.length === 0">
+              <td colspan="6" class="p-6 text-center text-gray-500 border-none">
+                No visitors found.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Table Footer: per-page + pagination -->
+    <div class="flex items-center justify-between px-4 py-3 bg-white border-t">
+      <div class="flex items-center gap-2">
+        <span class="text-gray-600 text-sm">Show</span>
+        <div class="relative">
+          <button
+            @click="togglePerPageDropdown"
+            class="flex items-center gap-1 border border-gray-300 px-2 py-1 rounded-md hover:bg-gray-50"
+          >
+            <span class="text-sm font-medium">{{ perPage }}</span>
+            <i class="bx bx-chevron-down text-gray-500"></i>
+          </button>
+          <div
+            v-if="perPageDropdown"
+            class="absolute left-0 mt-1 w-24 bg-white border rounded-md shadow-md z-10"
+          >
+            <button class="w-full px-3 py-1 text-left hover:bg-gray-100" @click="setPerPage(15)">
+              15
+            </button>
+            <button class="w-full px-3 py-1 text-left hover:bg-gray-100" @click="setPerPage(10)">
+              10
+            </button>
+            <button class="w-full px-3 py-1 text-left hover:bg-gray-100" @click="setPerPage(5)">
+              5
+            </button>
+          </div>
+        </div>
+        <span class="text-gray-600 text-sm">Employees per page</span>
+      </div>
+
+      <div class="flex items-center gap-1">
+        <button
+          @click="goToPage(currentPage - 1)"
+          :disabled="currentPage === 1"
+          class="px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-50 disabled:opacity-50"
+        >
+          <i class="bx bx-chevron-left text-lg"></i>
+        </button>
+
+        <button
+          v-for="page in pageNumbers"
+          :key="page"
+          @click="goToPage(page)"
+          :class="[
+            'px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-50',
+            currentPage === page ? 'bg-[#02739A] text-white border-[#02739A]' : '',
+          ]"
+        >
+          {{ page }}
+        </button>
+
+        <button
+          @click="goToPage(currentPage + 1)"
+          :disabled="currentPage === totalPages"
+          class="px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-50 disabled:opacity-50"
+        >
+          <i class="bx bx-chevron-right text-lg"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 </template>
+
 <script setup lang="ts">
 import { ref, computed } from "vue";
 
+// Définition de l'interface Employee avec showActions
+interface Employee {
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+  clockIn: string;
+  clockOut: string;
+  totalHours: string;
+  breakTime: string;
+  overtime: string;
+  status: string;
+  dept: string;
+  showActions?: boolean; // Propriété optionnelle pour l'affichage des actions
+}
+
 /* UI state */
-const showList = ref(true);
-const searchQuery = ref("");
-const showFilterPanel = ref(false);
-const yearDropdown = ref(false);
-const perPageDropdown = ref(false);
-const perPage = ref(15); // valeur par défaut 15
-const currentPage = ref(1);
-const filterStatus = ref("");
-const filterDept = ref("");
-const year = ref(2025);
+const showList = ref<boolean>(true);
+const searchQuery = ref<string>("");
+const showFilterPanel = ref<boolean>(false);
+const yearDropdown = ref<boolean>(false);
+const perPageDropdown = ref<boolean>(false);
+const perPage = ref<number>(15);
+const currentPage = ref<number>(1);
+const filterStatus = ref<string>("");
+const filterDept = ref<string>("");
+const year = ref<number>(2025);
 
 /* date arrows */
-const dates = ref([
+const dates = ref<string[]>([
   "Monday 05 October",
   "Tuesday 06 October",
   "Wednesday 07 October",
   "Thursday 08 October",
   "Friday 09 October",
 ]);
-const currentDate = ref("Monday 05 October");
+const currentDate = ref<string>("Monday 05 October");
 
-function prevDay() {
+function prevDay(): void {
   const index = dates.value.indexOf(currentDate.value);
   if (index > 0) currentDate.value = dates.value[index - 1];
 }
 
-function nextDay() {
+function nextDay(): void {
   const index = dates.value.indexOf(currentDate.value);
   if (index < dates.value.length - 1) currentDate.value = dates.value[index + 1];
 }
 
-function toggleYearDropdown() {
+function toggleYearDropdown(): void {
   yearDropdown.value = !yearDropdown.value;
 }
-function selectYear(y: number) {
+
+function selectYear(y: number): void {
   year.value = y;
   yearDropdown.value = false;
 }
-function toggleFilter() {
+
+function toggleFilter(): void {
   showFilterPanel.value = !showFilterPanel.value;
 }
-function togglePerPageDropdown() {
+
+function togglePerPageDropdown(): void {
   perPageDropdown.value = !perPageDropdown.value;
 }
-function setPerPage(n: number) {
+
+function setPerPage(n: number): void {
   perPage.value = n;
   perPageDropdown.value = false;
   currentPage.value = 1;
 }
-function goToPage(n: number) {
+
+function goToPage(n: number): void {
   if (n < 1) n = 1;
   if (n > totalPages.value) n = totalPages.value;
   currentPage.value = n;
 }
 
-/* Actions icônes */
-function editEmployee(emp: any) {
-  alert(`Modifier ${emp.name}`);
-}
-function deleteEmployee(emp: any) {
-  alert(`Supprimer ${emp.name}`);
-}
-function addEmployee(emp: any) {
-  alert(`Ajouter ${emp.name}`);
+/* Toggle actions pour un employé spécifique */
+function toggleActions(employeeId: string): void {
+  const employee = employees.value.find(emp => emp.id === employeeId);
+  if (employee) {
+    employee.showActions = !employee.showActions;
+  }
 }
 
-/* Employees data */
-const employees = ref([
+/* Récupérer l'état showActions d'un employé */
+function getShowActions(employeeId: string): boolean {
+  const employee = employees.value.find(emp => emp.id === employeeId);
+  return employee?.showActions || false;
+}
+
+/* Actions icônes */
+function editEmployee(emp: Employee): void {
+  alert(`Modifier ${emp.name}`);
+  // Fermer le menu après action
+  emp.showActions = false;
+}
+
+function deleteEmployee(emp: Employee): void {
+  alert(`Supprimer ${emp.name}`);
+  emp.showActions = false;
+}
+
+function addEmployee(emp: Employee): void {
+  alert(`Ajouter ${emp.name}`);
+  emp.showActions = false;
+}
+
+/* Employees data avec la propriété showActions */
+const employees = ref<Employee[]>([
   {
     id: "E01",
     name: "Jerome Bell",
@@ -310,6 +357,7 @@ const employees = ref([
     overtime: "2h 10",
     status: "On time",
     dept: "Engineering",
+    showActions: false,
   },
   {
     id: "E02",
@@ -323,6 +371,7 @@ const employees = ref([
     overtime: "-",
     status: "Late",
     dept: "Sales",
+    showActions: false,
   },
   {
     id: "E03",
@@ -336,6 +385,7 @@ const employees = ref([
     overtime: "2h 10",
     status: "Late",
     dept: "Design",
+    showActions: false,
   },
   {
     id: "E04",
@@ -349,6 +399,7 @@ const employees = ref([
     overtime: "2h 10",
     status: "On time",
     dept: "Engineering",
+    showActions: false,
   },
   {
     id: "E05",
@@ -362,6 +413,7 @@ const employees = ref([
     overtime: "-",
     status: "On time",
     dept: "Sales",
+    showActions: false,
   },
   {
     id: "E06",
@@ -375,6 +427,7 @@ const employees = ref([
     overtime: "2h 10",
     status: "On time",
     dept: "Design",
+    showActions: false,
   },
   {
     id: "E07",
@@ -388,6 +441,7 @@ const employees = ref([
     overtime: "-",
     status: "On time",
     dept: "Engineering",
+    showActions: false,
   },
   {
     id: "E08",
@@ -401,6 +455,7 @@ const employees = ref([
     overtime: "2h 10",
     status: "On time",
     dept: "Sales",
+    showActions: false,
   },
   {
     id: "E09",
@@ -414,6 +469,7 @@ const employees = ref([
     overtime: "-",
     status: "Late",
     dept: "Design",
+    showActions: false,
   },
   {
     id: "E10",
@@ -427,11 +483,12 @@ const employees = ref([
     overtime: "-",
     status: "Late",
     dept: "Design",
+    showActions: false,
   },
 ]);
 
 /* Computed filtered + paginated */
-const filteredEmployees = computed(() => {
+const filteredEmployees = computed<Employee[]>(() => {
   return employees.value.filter(
     (emp) =>
       emp.name.toLowerCase().includes(searchQuery.value.toLowerCase()) &&
@@ -440,18 +497,20 @@ const filteredEmployees = computed(() => {
   );
 });
 
-const totalPages = computed(() => Math.ceil(filteredEmployees.value.length / perPage.value));
-const paginatedEmployees = computed(() => {
+const totalPages = computed<number>(() =>
+  Math.ceil(filteredEmployees.value.length / perPage.value)
+);
+
+const paginatedEmployees = computed<Employee[]>(() => {
   const start = (currentPage.value - 1) * perPage.value;
   return filteredEmployees.value.slice(start, start + perPage.value);
 });
 
-const pageNumbers = computed(() => {
+const pageNumbers = computed<number[]>(() => {
   const pages = [];
   for (let i = 1; i <= totalPages.value; i++) pages.push(i);
   return pages;
 });
-employees.value = employees.value.map((emp) => ({ ...emp, showActions: false }));
 </script>
 
 <style scoped>

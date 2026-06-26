@@ -89,7 +89,7 @@
     <div v-if="activeTab === 'participants'" class="bg-white shadow-md rounded-lg p-4">
       <div class="flex justify-between items-center mb-4">
         <h3 class="text-lg font-semibold text-[#02739A]">
-          Participants de l'Événement : {{ selectedEvent.nom }}
+          Participants de l'Événement : {{ selectedEvent?.nom }}
         </h3>
         <button @click="activeTab = 'list'" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">Retour</button>
       </div>
@@ -100,11 +100,11 @@
             <th class="p-3 text-left">Email</th>
             <th class="p-3 text-left">Image</th>
             <th class="p-3 text-left">Adresse</th>
-            <th class="p-3 text-left">Date d’Inscription</th>
+            <th class="p-3 text-left">Date d'Inscription</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(visitor, index) in selectedEvent.visitors" :key="index" class="border-b hover:bg-gray-100">
+          <tr v-for="(visitor, index) in selectedEvent?.visitors || []" :key="index" class="border-b hover:bg-gray-100">
             <td class="p-3">{{ visitor.id }}</td>
             <td class="p-3">{{ visitor.email }}</td>
             <td class="p-3"><img :src="visitor.image" class="h-10 w-10 rounded-full object-cover"/></td>
@@ -121,17 +121,70 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-const activeTab = ref('list')
-const selectedEvent = ref<any>(null)
-const perPage = ref(5)
-const currentPage = ref(1)
+// Définition des interfaces
+interface Visitor {
+  id: string;
+  email: string;
+  image: string;
+  address: string;
+  createdAt: string;
+}
 
-const events = ref([
-  { entreprise: 'Mozar Group', nom: 'Forum Digital', lieu: 'Abidjan', date: '2025-11-01', heure: '09:00', createdAt: '2025-09-30', lien: '#', participation: 124, qrCode: 'https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=Forum+Digital', selected: false, dropdown: false },
-  { entreprise: 'Masek Holding', nom: 'Conférence Élite', lieu: 'Plateau', date: '2025-12-05', heure: '14:00', createdAt: '2025-10-05', lien: '#', participation: 58, qrCode: 'https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=Conference+Elite', selected: false, dropdown: false },
+interface Event {
+  entreprise: string;
+  nom: string;
+  lieu: string;
+  date: string;
+  heure: string;
+  createdAt: string;
+  lien: string;
+  participation: number;
+  qrCode: string;
+  selected: boolean;
+  dropdown: boolean;
+  visitors?: Visitor[];
+}
+
+// Type pour les données des visiteurs par événement
+type VisitorsData = {
+  [key: string]: Visitor[];
+}
+
+const activeTab = ref<'list' | 'participants'>('list')
+const selectedEvent = ref<Event | null>(null)
+const perPage = ref<number>(5)
+const currentPage = ref<number>(1)
+
+const events = ref<Event[]>([
+  {
+    entreprise: 'Mozar Group',
+    nom: 'Forum Digital',
+    lieu: 'Abidjan',
+    date: '2025-11-01',
+    heure: '09:00',
+    createdAt: '2025-09-30',
+    lien: '#',
+    participation: 124,
+    qrCode: 'https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=Forum+Digital',
+    selected: false,
+    dropdown: false
+  },
+  {
+    entreprise: 'Masek Holding',
+    nom: 'Conférence Élite',
+    lieu: 'Plateau',
+    date: '2025-12-05',
+    heure: '14:00',
+    createdAt: '2025-10-05',
+    lien: '#',
+    participation: 58,
+    qrCode: 'https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=Conference+Elite',
+    selected: false,
+    dropdown: false
+  },
 ])
 
-const visitorsData = {
+const visitorsData: VisitorsData = {
   'Forum Digital': [
     { id: 'V001', email: 'john@example.com', image: 'https://randomuser.me/api/portraits/men/1.jpg', address: 'Abidjan, Cocody', createdAt: '2025-10-10' },
     { id: 'V002', email: 'marie@example.com', image: 'https://randomuser.me/api/portraits/women/2.jpg', address: 'Yopougon, Abobo', createdAt: '2025-10-12' },
@@ -143,17 +196,35 @@ const visitorsData = {
   ]
 }
 
-function voirParticipants(event: any) {
-  selectedEvent.value = { ...event, visitors: visitorsData[event.nom] || [] }
+function voirParticipants(event: Event): void {
+  // Utilisation correcte de l'index avec le nom de l'événement
+  const eventName = event.nom as keyof VisitorsData;
+  const visitors = visitorsData[eventName] || [];
+
+  selectedEvent.value = {
+    ...event,
+    visitors: visitors
+  }
   activeTab.value = 'participants'
 }
 
-function ajouterEvent(event: any) { alert(`Ajouter pour ${event.nom}`) }
-function modifierEvent(event: any) { alert(`Modifier ${event.nom}`) }
-function supprimerEvent(index: number) { if(confirm('Supprimer cet événement ?')) events.value.splice(index,1) }
+function ajouterEvent(event: Event): void {
+  alert(`Ajouter pour ${event.nom}`)
+}
 
-const totalPages = computed(() => Math.ceil(events.value.length / perPage.value))
-const paginatedEvents = computed(() => {
+function modifierEvent(event: Event): void {
+  alert(`Modifier ${event.nom}`)
+}
+
+function supprimerEvent(index: number): void {
+  if(confirm('Supprimer cet événement ?')) {
+    events.value.splice(index, 1)
+  }
+}
+
+const totalPages = computed<number>(() => Math.ceil(events.value.length / perPage.value))
+
+const paginatedEvents = computed<Event[]>(() => {
   const start = (currentPage.value - 1) * perPage.value
   return events.value.slice(start, start + perPage.value)
 })
